@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8" />
+    <title>لعبة حرب برينزو</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            direction: rtl;
+            padding: 50px;
+        }
+        button {
+            padding: 15px 25px;
+            font-size: 18px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 25px;
+            font-size: 24px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+            width: 250px;
+        }
+        #game {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h2>تسجيل دخول - لعبة حرب برينزو</h2>
+    <input type="email" id="emailInput" placeholder="ادخل بريدك الإلكتروني" />
+    <br />
+    <input type="password" id="passwordInput" placeholder="ادخل كلمة المرور" />
+    <br />
+    <button onclick="login()">دخول</button>
+
+    <div id="game" style="display:none;">
+        <h2>🎮 مرحبًا بك في لعبة حرب برينزو!</h2>
+        <button onclick="playRound()">العب جولة</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const allowedEmail = "alzubairr.10.10@gmail.com";
+        const allowedPassword = "12345678";
+
+        function login() {
+            const email = document.getElementById("emailInput").value.trim();
+            const password = document.getElementById("passwordInput").value.trim();
+            if (email === allowedEmail && password === allowedPassword) {
+                document.getElementById("game").style.display = "block";
+            } else {
+                alert("🚫 البريد الإلكتروني أو كلمة المرور غير صحيحة!");
+            }
+        }
+
+        function playRound() {
+            const playerCard = Math.floor(Math.random() * 13) + 1;
+            const computerCard = Math.floor(Math.random() * 13) + 1;
+            let result = "";
+            if (playerCard > computerCard) {
+                result = "🎉 فزت في الجولة!";
+            } else if (playerCard < computerCard) {
+                result = "💔 خسرت الجولة.";
+            } else {
+                result = "🤝 تعادل!";
+            }
+            document.getElementById("result").innerText = `بطاقتك: ${playerCard} | بطاقة الخصم: ${computerCard}\n${result}`;
+        }
+    </script>
+</body>
+</html>
